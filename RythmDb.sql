@@ -1,3 +1,15 @@
+CREATE TABLE "Band" (
+  "Id" SERIAL PRIMARY KEY,
+"Name" TEXT,
+"CountryOfOrigin" TEXT,
+"NumberOfMembers" INT,
+"Website" TEXT,
+"Style" TEXT,
+"IsSigned" BOOL,
+"ContactName" TEXT,
+"ContactPhoneNumber" TEXT
+  );
+
 INSERT INTO "Band" (
   "Name","CountryOfOrigin", "NumberOfMembers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
 VALUES ('Daft Punk', 'France', '2', 'www.daftpunk.com', 'electronic', TRUE, 'Marcel', '777-777-7777' ),
