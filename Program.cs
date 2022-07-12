@@ -29,6 +29,8 @@ namespace RythmsGonnaGetYou
                 else
                     Console.WriteLine($"{band.Name} wrote {band.Album.Title}");
             }
+            // new band
+            // var newBand = 
         }
     }
 }
