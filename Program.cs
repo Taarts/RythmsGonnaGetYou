@@ -1,4 +1,5 @@
 ﻿using System;
+// using System.Globalization;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,6 +54,7 @@ namespace RythmsGonnaGetYou
             }
         }
 
+
         static void Main(string[] args)
         {
             var context = new RythmsGonnaGetYouContext();
@@ -99,14 +101,21 @@ namespace RythmsGonnaGetYou
                         else
                         {
                             var newAlbum = new Album();
-                            Console.WriteLine($"Do you want to add album to {foundBand.Name}? [Y/N] ");
-                            Console.ReadLine();
+                            Console.WriteLine($"Do you want to add an album to {foundBand.Name}? [Y/N] ");
+                            var answer = Console.ReadLine();
 
-                            if ( = "Y")
+                            if (answer == "Y")
                             {
-                                newAlbum.Title = PromptForString("What is the name of album you want to add? ");
-                                newAlbum.IsExplicit = PromptForString("Does the album have any explicit tracks? [Y/N]");
-                                newAlbum.ReleaseDate = Prom
+                                var Title = PromptForString("What is the name of album you want to add? ");
+                                var IsExplicit = PromptForString("Does the album have any explicit tracks? [Y/N]");
+
+
+                                Console.WriteLine($"What's the release date? (YYYY-MM-DD) ");
+                                var ReleaseDate = DateTime.Parse(Console.ReadLine());
+                                // var inputValue = DateTime.Parse(CRL() );
+                                // inputValueUTC = ReleaseDate.ToUniversalTime();
+                                // var inputValueInUTC = inputValue.ToUniversalTime ();
+
                             }
                         }
 
@@ -126,14 +135,14 @@ namespace RythmsGonnaGetYou
                 {
                     var context = new RythmsGonnaGetYouContext();
 
-                    newBand.Name = PromptForString("What is the name of the new band? ");
-                    newBand.CountryOfOrigin = PromptForString("What is the country of origin? ");
-                    newBand.NumberOfMembers = PromptForInteger("How many band members are there? ");
-                    newBand.Website = PromptForString("what's the band web address? ");
-                    newBand.Style = PromptForString("What music genre do they play? ");
-                    newBand.IsSigned = PromptForBool("Are they signed to a record label? ");
-                    newBand.ContactName = PromptForString("Who is the main contact? ");
-                    newBand.ContactPhoneNumber = PromptForString("What is the contact phone number? ");
+                    var Name = PromptForString("What is the name of the new band? ");
+                    var CountryOfOrigin = PromptForString("What is the country of origin? ");
+                    var NumberOfMembers = PromptForInteger("How many band members are there? ");
+                    var Website = PromptForString("what's the band web address? ");
+                    var Style = PromptForString("What music genre do they play? ");
+                    var IsSigned = PromptForBool("Are they signed to a record label? ");
+                    var ContactName = PromptForString("Who is the main contact? ");
+                    var ContactPhoneNumber = PromptForString("What is the contact phone number? ");
 
                     context.Bands.Add(newBand);
                     context.SaveChanges();
@@ -147,9 +156,11 @@ namespace RythmsGonnaGetYou
 
         private static void viewAllBands(RythmsGonnaGetYouContext context)
         {
+            Console.WriteLine("These are our bands:");
             foreach (var viewBand in context.Bands)
-                Console.WriteLine("These are our bands:");
-            Console.WriteLine($" - {viewBand.Name}");
+            {
+                Console.WriteLine($" - {viewBand.Name}");
+            }
         }
     }
 }
