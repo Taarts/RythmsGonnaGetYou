@@ -14,11 +14,11 @@ namespace RythmsGonnaGetYou
         public string ContactName { get; set; }
         public string ContactPhoneNumber { get; set; }
 
-        // is it possible to have \/ ASWELL? | does interfere with 1/many? | is it superfluous?
+        // is it possible to have vvv ASWELL? | does interfere with 1/many? | is it superfluous?
         public Album Album { get; set; }
 
         // one to many relationship from Band to Albums & Songs
-        public List<Album> Albums { get; set; }
+        // public List<Album> Albums { get; set; }
         // public List<Song> Songs { get; set; }
     }
 }
