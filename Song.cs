@@ -5,10 +5,13 @@ namespace RythmsGonnaGetYou
         public int Id { get; set; }
         public int TrackNumber { get; set; }
         public string Title { get; set; }
-        public string Album { get; set; }
         public int Duration { get; set; }
+
+        // 'Song' has a 121 relationship with Band and Album
+        // public int BandId { get; set; }
         public int AlbumId { get; set; }
 
-        // public Album Album { get; set; }
+        // public Band Band { get; set; }
+        public Album Album { get; set; }
     }
 }
