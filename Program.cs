@@ -89,36 +89,7 @@ namespace RythmsGonnaGetYou
                         viewAllBands(context);
                         break;
                     case "F":
-                        var name = PromptForString("What band are you looking for? ");
-                        // search to see if the employee exists
-                        Band foundBand = context.FindOneBand(name);
-                        // if employee not found 
-                        if (foundBand == null)
-                        {
-                            Console.WriteLine("Band doesn't exist.");
-                        }
-                        // add album?
-                        else
-                        {
-                            var newAlbum = new Album();
-                            Console.WriteLine($"Do you want to add an album to {foundBand.Name}? [Y/N] ");
-                            var answer = Console.ReadLine();
-
-                            if (answer == "Y")
-                            {
-                                var Title = PromptForString("What is the name of album you want to add? ");
-                                var IsExplicit = PromptForString("Does the album have any explicit tracks? [Y/N]");
-
-
-                                Console.WriteLine($"What's the release date? (YYYY-MM-DD) ");
-                                var ReleaseDate = DateTime.Parse(Console.ReadLine());
-                                // var inputValue = DateTime.Parse(CRL() );
-                                // inputValueUTC = ReleaseDate.ToUniversalTime();
-                                // var inputValueInUTC = inputValue.ToUniversalTime ();
-
-                            }
-                        }
-
+                        findBand(context);
                         break;
 
                     default:
@@ -152,6 +123,41 @@ namespace RythmsGonnaGetYou
 
             // private static void bandsWithAlbums(RythmsGonnaGetYouContext context)
 
+        }
+
+        private static void findBand(RythmsGonnaGetYouContext context)
+        {
+            var name = PromptForString("What band are you looking for? ");
+
+            Band foundBand = context.FindOneBand(name);
+
+            if (foundBand == null)
+            {
+                Console.WriteLine("Band doesn't exist.");
+            }
+            // add album?
+            else
+            {
+                var newAlbum = new Album();
+                Console.WriteLine($"Do you want to add an album to {foundBand.Name}? [Y/N] ");
+                var answer = Console.ReadLine();
+
+                if (answer == "Y")
+                {
+                    newAlbum.Title = PromptForString("What is the name of album you want to add? ");
+                    newAlbum.IsExplicit = PromptForString("Does the album have any explicit tracks? [Y/N]");
+                    newAlbum.Band = foundBand;
+
+                    Console.WriteLine($"What's the release date? (YYYY-MM-DD) ");
+                    var ReleaseDate = DateTime.Parse(Console.ReadLine());
+
+                    var inputValueUTC = ReleaseDate.ToUniversalTime();
+
+                    newAlbum.ReleaseDate = inputValueUTC;
+                    context.Albums.Add(newAlbum);
+                    context.SaveChanges();
+                }
+            }
         }
 
         private static void viewAllBands(RythmsGonnaGetYouContext context)
