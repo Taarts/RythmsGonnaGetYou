@@ -23,6 +23,12 @@ namespace RythmsGonnaGetYou
 
             return foundBand;
         }
+        public Album FindOneAlbum(string nameToFind)
+        {
+            Album foundAlbum = Albums.FirstOrDefault(Album => Album.Title.ToUpper().Contains(nameToFind.ToUpper()));
+
+            return foundAlbum;
+        }
 
     }
 }
